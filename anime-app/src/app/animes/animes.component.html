@@ -1,0 +1,53 @@
+<!-- Full Page Image Header with Vertically Centered Content -->
+<header class="masthead">
+  <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-12 text-center">
+        <h1 class="font-weight-light">Anime Recommendation Website</h1>
+        <p class="lead">Let's find your Anime</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="row">
+  <div class ="col-2">
+    <ul class="list-group">
+      <li class="list-group-item">Year</li>
+      <li class="list-group-item">Genre</li>
+      <li class="list-group-item">Score</li>
+      <li class="list-group-item">Season</li>
+    </ul>
+  </div>
+  <div class="col-8">
+
+    <div class="row">
+      <ng-container *ngFor="let p of animes$ | paginate: { itemsPerPage: 12, currentPage: p } ; let i=index">
+        <div class="col">
+          <div class="card" style="width: 12rem;">
+            <img class="card-img-top" [src]="p.image_url" alt="Card image cap">
+            <p class="card-text">{{ p.score }}</p>
+            <div class="card-body">
+              <h5 class="card-title">{{ p.title }}</h5>
+              <div class="middle">
+                <a [routerLink]="['/anime_detail/', p.anime_id]" class="btn btn-primary">Watch Anime</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="(i+1) % 4 ===0" class="w-100"></div>
+        <div *ngIf="(i+2) % 4 ===1" class="w-100"></div>
+        <div *ngIf="(i+3) % 4 ===2" class="w-100"></div>
+      </ng-container>
+      <br>
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+  </div>
+  <div class="col-2">
+    <ul class="list-group">
+      <li class="list-group-item"><a (click)="sortScore()">Highest Score</a></li>
+      <li class="list-group-item"><a (click)="sortEp()">Most Episodes</a></li>
+      <li class="list-group-item"><a (click)="sortYear()">Most Recent</a></li>
+    </ul>
+  </div>
+</div>

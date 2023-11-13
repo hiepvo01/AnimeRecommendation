@@ -1,0 +1,99 @@
+<body>
+  <div class="detail">
+    <div class="row">
+      <mat-tab-group mat-align-tabs="Second">
+        <mat-tab label="Overview">
+          <div style="clear: left;">
+            <p style="float: left; margin-right:10px; margin-bottom:0px; margin-top:10px"><img [src]="anime.image_url"
+                id="first-img"
+                height="310" width="200" border="1px"> </p>
+            <h3>Overview</h3>
+            <p>{{anime.synopsis}}</p>
+            <div style="float:left" class="genre">
+              <h3>Genres</h3>
+              <p>{{anime.genre}}</p>
+            </div>
+            <div style="float:right" class="genre">
+              <h3>Scores</h3>
+              <p>{{anime.score}}</p>
+            </div>
+          </div>
+          <div style="clear: left;">
+            <h3>Similar Animes</h3>
+          </div>
+          <div class="col-16" style="margin-left:0; float:left;">
+            <div style="width: 62rem;" class="row">
+            <ng-container
+            *ngFor="let p of similars ; let i=index">
+                <div class="card" style="width: 11rem; margin-left:1.5%; float:left;">
+                  <img class="card-img-top" [src]="p.image_url" alt="Card image cap">
+                  <p class="card-text">{{ p.score }}</p>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ p.title }}</h5>
+                    <div class="middle">
+                      <a [routerLink]="['/anime_detail/', p.anime_id]" class="btn btn-primary" (click)="clear()">Watch
+                        Anime</a>
+                    </div>
+                  </div>
+                </div>
+              <div *ngIf="(i+1) % 5 ===0" class="w-100"></div>
+              <div *ngIf="(i+2) % 5 ===1" class="w-100"></div>
+              <div *ngIf="(i+3) % 5 ===2" class="w-100"></div>
+              <div *ngIf="(i+4) % 5 ===3" class="w-100"></div>
+            </ng-container>
+          </div>
+          </div>
+        </mat-tab>
+
+        <mat-tab label="Episodes">
+          <h2>{{anime.title}}</h2>
+          <iframe allow="encrypted-media" allowfullscreen="" height="535" width="950" [src]="(episode_url) | safe"></iframe>
+          <br>
+
+          <span *ngFor="let n of numSequence(anime.episodes + 1);
+               let i = index;"><a class="btn btn-primary" (click)="newEp(i)">{{i}}</a>
+               </span>
+        </mat-tab>
+        <mat-tab label="Statistics">
+          <h2>Scores</h2>
+          <div [innerHtml]="myStyle"></div>
+          <div [innerHTML]="score_url | safeHtml"></div><br>
+          <h2>Word Cloud</h2>
+          <figure id="wordcloudd"></figure>
+        </mat-tab>
+        <mat-tab label="Discussion">
+          <h2>Reviews</h2>
+          <table class="table table-striped">
+            <thead>
+              <tr class="table-head">
+                <th style="width: 20%">User</th>
+                <th style="width: 15%">Score</th>
+                <th style="width: 65%">Review</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let review of reviews">
+                <td>{{review.profile}}</td>
+                <td>{{review.score}}</td>
+                <td class="review">{{review.text}}</td>
+                <!-- <td style="white-space: nowrap">
+                  <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                  <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user"
+                    [disabled]="user.isDeleting">
+                    <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!user.isDeleting">Delete</span>
+                  </button>
+                </td> -->
+              </tr>
+              <tr *ngIf="!reviews">
+                <td colspan="4" class="text-center">
+                  <span class="spinner-border spinner-border-lg align-center"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,31 @@
+﻿<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
+  <div class="navbar-nav">
+      <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a class="nav-item nav-link" routerLink="/animes" routerLinkActive="active">Animes</a>
+      <a class="nav-item nav-link" routerLink="/description" routerLinkActive="active">Description</a>
+      <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+  <form class="form-inline ml-auto">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+      (keydown.enter)="save($event)">
+  </form>
+</nav>
+
+<!-- main app container -->
+<div class="app-container" [ngClass]="{ 'bg-light': user }">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div>
+
+
+<!-- credits -->
+<div class="text-center mt-4">
+  <p>
+    <a href="https://github.com/shafqatshad/Anmie-Recommender-System" target="_blank">Anime Recommendation App</a>
+  </p>
+</div>
+
+
+
+
