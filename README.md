@@ -2,9 +2,7 @@
 
 This project uses Angular, FLask Python and SQLite to create a user friendly anime website.
 
-Since the SQLite data file is too big for github repo (> 1 Gb), here is the source code pushed to gitlab that includes SQLite database:
-
-https://gitlab.com/hiep.vo/animeangular
+This repo is currently not working due to outdated version of Angular 10.0 and missing database and secret json file for Dialogflow bot but a video demo is recorded
 
 ## Demo
 
@@ -12,7 +10,9 @@ https://www.youtube.com/watch?v=AAU1WYZCmIs&t=120s&ab_channel=HiepVo
 
 ## Run Angular frontend
 cd anime-app
+
 npm install
+
 ng serve
 
 ## Run flask backend
